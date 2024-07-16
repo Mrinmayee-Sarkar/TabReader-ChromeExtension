@@ -1,14 +1,16 @@
 {
     "manifest_version": 3,
-    "name": "Tab Content Reader",
+    "name": "Selected Text Reader",
     "version": "1.0",
-    "description": "Read the content of the currently active tab.",
+    "description": "Read the selected text from the currently active tab.",
     "permissions": [
       "activeTab",
-       "scripting"
+      "scripting"
+    ],
+    "host_permissions": [
+      "<all_urls>"
     ],
     "action": {
       "default_popup": "popup.html"
     }
   }
-  

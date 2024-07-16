@@ -3,36 +3,22 @@ document.addEventListener('DOMContentLoaded', function() {
     chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
       chrome.scripting.executeScript({
         target: { tabId: tabs[0].id },
-        function: getTextContent
+        function: getSelectedText
       }).then(result => {
-        const content = result[0].result;
-        document.getElementById('content').innerText = content;
+        const selectedText = result[0].result;
+        if (selectedText) {
+          document.getElementById('content').textContent = selectedText;
+        } else {
+          document.getElementById('content').textContent = 'No text selected. Please select some text on the page and try again.';
+        }
       }).catch(error => {
-        console.error('Failed to read content:', error);
-        document.getElementById('content').innerText = 'Failed to read content. Please try again.';
+        console.error('Failed to read selected text:', error);
+        document.getElementById('content').textContent = 'Failed to read selected text. Please try again.';
       });
     });
   });
 });
 
-function getTextContent() {
-  // This function will be injected into the page
-  function extractTextContent(node) {
-    if (node.nodeType === Node.TEXT_NODE) {
-      return node.textContent;
-    }
-    if (node.nodeType !== Node.ELEMENT_NODE) {
-      return '';
-    }
-    if (node.tagName === 'SCRIPT' || node.tagName === 'STYLE') {
-      return '';
-    }
-    let text = '';
-    for (let child of node.childNodes) {
-      text += extractTextContent(child);
-    }
-    return text.trim() + (text ? '\n' : '');
-  }
-
-  return extractTextContent(document.body).trim();
+function getSelectedText() {
+  return window.getSelection().toString();
 }
