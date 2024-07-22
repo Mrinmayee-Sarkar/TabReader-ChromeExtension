@@ -1,0 +1,24 @@
+#selection-toolbar {
+  position: absolute !important;
+  z-index: 2147483647 !important;
+  background-color: white !important;
+  border: 1px solid #ccc !important;
+  border-radius: 4px !important;
+  padding: 4px !important;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
+}
+
+#selection-toolbar button {
+  background-color: black !important;
+  color: white !important;
+  border: none !important;
+  padding: 4px 8px !important;
+  margin: 0 2px !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+}
+
+#selection-toolbar button:hover {
+  background-color: #333 !important;
+}
